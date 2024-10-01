@@ -40,7 +40,7 @@ const teacherDetailSchema = new mongoose.Schema({
 
     group: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Group'
+        ref: 'presentationGroups'
     }],
 
     school: {
