@@ -17,26 +17,27 @@ const presentationGroupSchema = new mongoose.Schema({
         minlength: 1,
         maxlength: 200
     }],
-    groupmembers: [
+    groupMembers: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'studentDetail',
             required: true,
         },
     ],
-    groupMemberRoles: [{
+    projectRoles: [{
         studentId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            unique: true
         },
-        memberRoles: {
+        groupWorkRole: {
             type: String,
             required: true,
             trim: true,
             minlength: 1,
             maxlength: 100
-        }
+        },
+        _id: false, // prevent _id generation for projectRoles Field
+
     }],
 
     role: {
@@ -59,33 +60,39 @@ const presentationGroupSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'teacherDetail',
     },
-    guideAcId: {
+    activityCoordinatorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'teacherDetail',
     },
-    RemovingForcefully: [{
-        studentId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-        },
-        removingVote: [{
+    RemovingForcefully: [
+        {
             studentId: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: true,
-                unique: true,   // Ensures a student can only vote once
             },
-            message: {
-                type: String,
-                trim: true,
-                minlength: 5,
-                maxlength: 100,
-            },
-            createdAt: {
-                type: Date,
-                default: Date.now,
-            }
-        }]
-    }],
+            removingVote: [
+                {
+                    studentId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        required: true,
+                        unique: true,  // Ensures a student can only vote once
+                    },
+                    message: {
+                        type: String,
+                        trim: true,
+                        minlength: 5,
+                        maxlength: 100,
+                    },
+                    createdAt: {
+                        type: Date,
+                        default: Date.now,
+                    },
+                    _id: false, // prevent _id generation for removingVote Field
+                },
+            ],
+            _id: false,  // Prevent _id generation for RemovingForcefully Field
+        },
+    ],
 
     createdAt: {
         type: Date,
