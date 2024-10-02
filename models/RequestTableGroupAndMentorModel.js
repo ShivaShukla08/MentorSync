@@ -37,6 +37,10 @@ const RequestTableGroupAndMentorSchema = new mongoose.Schema({
         default: 'pending'
     },
 
+    requestedByStudents: [{
+        type: mongoose.Schema.Types.ObjectId,
+    }],
+
     message:{
         reject: [{
             projectId: {
@@ -52,7 +56,8 @@ const RequestTableGroupAndMentorSchema = new mongoose.Schema({
             createdAt: {
                 type: Date,
                 default: Date.now,
-            }
+            },
+            _id: false,  // Prevent automatic _id generation for reject field
         }],
 
         accept: {
