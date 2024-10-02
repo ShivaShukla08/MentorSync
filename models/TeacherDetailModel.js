@@ -29,6 +29,12 @@ const teacherDetailSchema = new mongoose.Schema({
 
     personalMail: {
         type: String,
+        validate: {
+            validator: function(v) {
+                return /@gmail\.com$/.test(v);
+            },
+            message: props => `${props.value} is not a valid Gmail!`
+        }
     },
 
     phoneNumber: {
