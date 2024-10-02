@@ -5,11 +5,9 @@ const bcrypt = require('bcryptjs');
 
 const teacherDetailSchema = new mongoose.Schema({
     tid: {
-        type: String,
+        type: Number,
         require: [true, 'Please enter your Id'],
         unique: true,
-        trim: true,
-        lowercase: true
     },
 
     name: {
