@@ -5,6 +5,7 @@ dotenv.config({ path: "./config.env" });
 const app = require("./ApiGateway/app");
 const DB = process.env.DATABASE_URL;
 
+
 // .............................Code of connection with Database............................................
 
 mongoose
@@ -23,3 +24,4 @@ const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
+
