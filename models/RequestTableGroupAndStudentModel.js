@@ -1,74 +1,78 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const requestTableSchema = new mongoose.Schema({
+  ///0 means student to group and 1 means group to student
   type: {
     type: String,
-    enum: ['0', '1'],
-    required: true
+    enum: ["0", "1"],
+    required: true,
   },
- 
+
   student_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'studentdetails',
-    required: true
+    ref: "studentdetails",
+    required: true,
   },
 
   group_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'presentationgroup',
-    required: true
+    ref: "presentationgroup",
+    required: true,
   },
 
-    createdAt: {
-        type: Date,
-        date: Date.now()
-    },
+  createdAt: {
+    type: Date,
+    date: Date.now(),
+  },
 
   Rollback: {
     type: Boolean,
-    default: false
+    default: false,
   },
 
   accept1: {
     type: String,
-    enum: ['pending', 'accept', 'reject'],
-    default: 'pending'
+    enum: ["pending", "accept", "reject"],
+    default: "pending",
   },
 
   accept2: {
     type: String,
-    enum: ['pending', 'accept', 'reject'],
-    default: 'pending'
+    enum: ["pending", "accept", "reject"],
+    default: "pending",
   },
 
   note: {
     type: String,
-    default: ''
+    default: "",
   },
 
   validity: {
     first: {
       type: Boolean,
-      required: true
+      required: true,
     },
     second: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
 
   leave: {
-   type: Boolean,
-   default: false
+    type: Boolean,
+    default: false,
   },
 
   rejectMessage: {
     type: String,
     maxlength: 100,
-    default: ''
-  }
+    default: "",
+  },
 });
 
-const RequestTable = mongoose.model('requestTableGroupAndStudent', requestTableSchema);
+const RequestTable = mongoose.model(
+  "requestTableGroupAndStudent",
+  requestTableSchema
+);
 
 module.exports = RequestTable;
