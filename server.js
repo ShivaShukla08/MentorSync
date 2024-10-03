@@ -8,6 +8,7 @@ const DB = process.env.DATABASE_URL;
 const StudentDetail = require('./models/StudentDetailModel'); 
 const TeacherDetail = require('./models/TeacherDetailModel');   
 const RequestTable  = require('./models/RequestTableGroupAndStudentModel'); 
+const UserDetail = require('./models/UserModel'); 
 
 // .............................Code of connection with Database............................................
 

@@ -3,7 +3,7 @@ const validator = require("validator");
 
 const studentDetailSchema = new mongoose.Schema({
   sapId: {
-    type: Number,
+    type: String,
     require: [true, "Please enter your Id"],
     unique: true,
   },
@@ -73,15 +73,16 @@ const studentDetailSchema = new mongoose.Schema({
       },
     },
     contactNo: {
-      type: String,
-      required: true, // Corrected from 'require' to 'required'
+      type: Number,
+      required: true,
       validate: {
         validator: function (v) {
-          return /^\d{10}$/.test(v);
+          // Check if the number has exactly 10 digits
+          return /^\d{10}$/.test(v.toString());
         },
         message: "Please enter a valid 10-digit contact number",
       },
-    },
+    }    
   },
 
   parentInformation: {
@@ -101,15 +102,16 @@ const studentDetailSchema = new mongoose.Schema({
       },
     },
     contactNo: {
-      type: String,
-      required: true, // Corrected from 'require' to 'required'
+      type: Number,
+      required: true,
       validate: {
         validator: function (v) {
-          return /^\d{10}$/.test(v);
+          // Check if the number has exactly 10 digits
+          return /^\d{10}$/.test(v.toString());
         },
         message: "Please enter a valid 10-digit contact number",
       },
-    },
+    }    
   },
 
   previousGroup: [
@@ -130,11 +132,6 @@ const studentDetailSchema = new mongoose.Schema({
       message:
         "Skills can have up to 50 elements, each with a maximum length of 100 characters.",
     },
-  },
-
-  role: {
-    type: String,
-    default: "Student",
   },
 
   gender: {
