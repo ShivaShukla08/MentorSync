@@ -5,6 +5,11 @@ dotenv.config({ path: "./config.env" });
 const app = require("./ApiGateway/app");
 const DB = process.env.DATABASE_URL;
 
+const StudentDetail = require('./models/StudentDetailModel'); 
+const TeacherDetail = require('./models/TeacherDetailModel');   
+const RequestTable  = require('./models/RequestTableGroupAndStudentModel'); 
+const UserDetail = require('./models/UserModel'); 
+
 // .............................Code of connection with Database............................................
 
 mongoose
@@ -23,3 +28,4 @@ const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
+
