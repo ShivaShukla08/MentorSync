@@ -13,7 +13,7 @@ const projectDetailSchema = new mongoose.Schema({
   },
   links: [
     {
-      name: {
+      label: {
         type: String,
         required: false
       },
