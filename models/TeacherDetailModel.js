@@ -1,45 +1,53 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
 const validator = require('validator');
-const bcrypt = require('bcryptjs');
 
 const teacherDetailSchema = new mongoose.Schema({
     tid: {
-        type: Number,
-        require: [true, 'Please enter your Id'],
+        type: String,
+        required: [true, 'Please enter your Id'],
         unique: true,
+        trim: true,
+        lowercase: true
     },
 
     name: {
         type: String,
-        require: true,
+        required: [true, 'Please enter your name'],
         trim: true,
     },
 
     age: {
         type: Number,
-        require: true,
-        max: [100, 'Age are not allowed greater than 100']
+        required: [true, 'Please enter your age'],
+        min: [18, 'Age cannot be less than 18'], // Add a min age check
+        max: [100, 'Age cannot be greater than 100']
     },
 
     gender: {
         type: String,
-        require: true
+        required: [true, 'Please specify your gender']
     },
 
     personalMail: {
         type: String,
         validate: {
-            validator: function(v) {
+            validator: function (v) {
                 return /@gmail\.com$/.test(v);
             },
             message: props => `${props.value} is not a valid Gmail!`
         }
     },
 
-    phoneNumber: {
+    contactNo: {
         type: Number,
-        min: [9]
+        required: [true, 'Please enter your contact number'],
+        validate: {
+            validator: function (v) {
+                // Check if the number has exactly 10 digits return /^\d{10}$/.test(v.toString());
+                return /^\d{10}$/.test(v.toString());
+            },
+            message: "Please enter a valid 10-digit contact number",
+        },
     },
 
     group: [{
@@ -49,7 +57,7 @@ const teacherDetailSchema = new mongoose.Schema({
 
     school: {
         type: String,
-        require: true
+        required: [true, 'Please specify your school']
     },
 
     photo: {
@@ -59,81 +67,28 @@ const teacherDetailSchema = new mongoose.Schema({
 
     profileSummary: {
         type: String,
-        maxlength: 500,
+        maxlength: [500, 'Profile summary cannot exceed 500 characters'],
         select: false
     },
 
     workExperience: {
         type: String,
-        maxlength: 500,
+        maxlength: [500, 'Work experience cannot exceed 500 characters'],
         select: false
     },
 
     researchInterests: {
         type: String,
-        maxlength: 500,
+        maxlength: [500, 'Research interests cannot exceed 500 characters'],
         select: false
     },
 
     status: {
-        full: {
-            type: Boolean,
-            default: false
-        },
-        notFull: {
-            type: Boolean,
-            default: true
-        },
-    },
-
-    role: {
         type: String,
-        default: 'teacher'
+        enum: ['full', 'notFull'],
+        default: 'notFull'
     },
-
-    password: {
-        type: String,
-        require: [true, 'User must have a password'],
-        min: [6, 'Password must be at least 6 characters'],
-        max: [60, 'Password must not be more than 60 characters'],
-        select: false
-    },
-
-    passwordConfirm: {
-        type: String,
-        require: [true, 'User must confirm password'],
-        validate: {
-            // This only works on create and save()
-            validator: function (el) {
-                return el === this.password
-            },
-            message: 'Passwords are not the same'
-        },
-    },
-
-    passwordChangedAt: Date,
-    active: {
-        type: Boolean,
-        default: true,
-        select: false
-    }
 });
-
-teacherDetailSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-
-    // Hash the password with cost of 12
-    this.password = await bcrypt.hash(this.password, 12);
-
-    // delete passwordconfirm password field
-    this.passwordConfirm = undefined;
-
-    next();
-});
-
-teacherDetailSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
-    return await bcrypt.compare(candidatePassword, userPassword);
-};
 
 const teacherDetail = mongoose.model('teacherDetail', teacherDetailSchema);
 
