@@ -13,7 +13,7 @@ const groupMentorSchema = new mongoose.Schema({
   },
   project_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ProjectDetail",
+    ref: "projectDetail",
     required: [true, "Porject id is required"],
   },
 });
