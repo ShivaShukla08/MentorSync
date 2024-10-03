@@ -5,6 +5,9 @@ dotenv.config({ path: "./config.env" });
 const app = require("./ApiGateway/app");
 const DB = process.env.DATABASE_URL;
 
+const StudentDetail = require('./models/StudentDetailModel'); 
+const TeacherDetail = require('./models/TeacherDetailModel');   
+const RequestTable  = require('./models/RequestTableGroupAndStudentModel'); 
 
 // .............................Code of connection with Database............................................
 
