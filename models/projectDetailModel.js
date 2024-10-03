@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const projectDetailSchema = new mongoose.Schema({
-  projectId: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
   groupId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group',
@@ -14,18 +9,44 @@ const projectDetailSchema = new mongoose.Schema({
   projectTitle: {
     type: String,
     required: true,
-    immutable: true 
+    immutable: true
   },
-  links: {
-    type: [String], // Array of links
-    default: []
-  },
+  links: [
+    {
+      name: {
+        type: String,
+        required: false
+      },
+      link: {
+        type: String,
+        required: false
+      }
+    }
+  ],
   projectDescription: {
     type: String,
-    required: true
+    required: false
   },
   projectTechStack: {
-    type: String,
+    type: [
+      {
+        technologyName: {
+          type: String,
+          required: true
+        },
+        value: {
+          type: [String], // Array of strings for versions
+          required: false,
+          default: []
+        }
+      }
+    ], // Array of objects with technologyName and versionsUsed
+    validate: {
+      validator: function (val) {
+        return val.length <= 500; // Validate array size
+      },
+      message: 'The projectTechStack can contain a maximum of 500 technologies.'
+    },
     required: true
   }
 });
