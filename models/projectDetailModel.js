@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 const projectDetailSchema = new mongoose.Schema({
-  project_id: {
+  projectId: {
     type: Number,
     required: true,
     unique: true,
   },
-  group_id: {
+  groupId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group',
     required: true
   },
-  project_title: {
+  projectTitle: {
     type: String,
     required: true,
     immutable: true 
@@ -20,11 +20,11 @@ const projectDetailSchema = new mongoose.Schema({
     type: [String], // Array of links
     default: []
   },
-  project_description: {
+  projectDescription: {
     type: String,
     required: true
   },
-  project_techstack: {
+  projectTechStack: {
     type: String,
     required: true
   }
