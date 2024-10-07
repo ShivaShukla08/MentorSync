@@ -12,5 +12,5 @@ exports.finalcontrollerfunctions = async (req, res) => {
     const data = req.user;
     res.status(404).json({
         status: 'Success', data
-    })
+    });
 }
