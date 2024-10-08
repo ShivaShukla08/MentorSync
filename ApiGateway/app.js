@@ -11,6 +11,11 @@ const app = express();
 const StudentRouter = require("./StudentRoutes");
 const TeacherRouter = require("./TeacherRoutes");
 const AdminRouter = require("./AdminRoutes");
+const TestingRouter = require("./TestingRoutes")
+
+// Add Routes
+// app.use('/api/v1/student', StudentRouter);
+app.use('/api/v1/test', TestingRouter);
 
 
 // Route Handling
