@@ -4,15 +4,13 @@ const presentationGroup = require('../models/PresentationGroupsModel');
 exports.isGroupAdmin = async (req, res, next) => {
 
     const userId = req.user._id.toString();
-    const groupId = req.user.groupId;
+    const groupDetail = req.userGroup;
 
-    if (groupId) {
-        const groupDetails = await presentationGroup.findById(groupId);
-
+    if (groupDetail) {
         // Check if user is an admin or not
-        let isAdmin = groupDetails.role.admin.some(adminId => {
-            // return userId === adminId.toString();     
-            return userId == adminId;
+        let isAdmin = groupDetail.role.admin.some(adminId => {
+            //  return userId === adminId.toString();     
+             return userId == adminId;
         });
         
         // if user are Admin then move to next middleware

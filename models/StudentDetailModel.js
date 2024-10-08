@@ -45,7 +45,7 @@ const studentDetailSchema = new mongoose.Schema({
 
   groupId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "PresentationGroup",
+    ref: "presentationGroup",
     default: null,
   },
 
