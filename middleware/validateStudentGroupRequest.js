@@ -1,84 +1,42 @@
 const mongoose = require('mongoose');
 const requestTable = require('./../models/RequestTableGroupAndStudentModel');
 
-
 const validateGroupStudentRequest = async function(req,res,next){
     try{
-        const requestId = req.body.requestId;          // Student_id and group_id param
-        console.log(req.params)
-        console.log(req.query);
-        const isValid = mongoose.Types.ObjectId.isValid(requestId);
-        console.log(requestId);
 
-        if(!isValid)
-        {
-            return res.status(404).json({
-                statuscode: 404,
-                message:'requestId is invalid',
-                requestId,
-            })
+        // Logic: We need groupID and studentId to check in requestTable..
+
+        var groupId, studentId;
+
+        // Step1: Identify the type of request (0 or 1).
+        
+           // if Type 1
+           if(req.params.studentId){
+              studentId =  req.params.studentId;
+              groupId = req.user.groupId;
+           }
+
+           // if Type 0
+           if(req.params.groupId){
+            groupId = req.params.groupId;
+            studentId = req.user.id
+         }
+
+        // Step 2: Check if both student_id and group_id exist in the requestTable
+
+        const requestExists = await requestTable.findOne({
+            student_id: studentId,
+            group_id: groupId
+        });
+
+
+        // Step 3: Handle the result
+        if (requestExists) {
+            next();
+        } else {
+            return res.status(200).json({ message: 'Request already exists.', request: requestExists });
         }
-
-        const request = await requestTable.findById(requestId); 
-
-        if(!request)
-        {
-            return res.status(404).json({
-                statuscode: 404,
-                message:'Request Not found',
-                requestId,
-                suggestion: 'Please check if the request ID is correct and try again.'
-            })
-        }
-
-        return res.status(200).json({
-            statuscode: 200,
-            message:'Request found',
-            requestId,
-        })
-        next();
-    }
-    catch(error)
-    {
-        res.status(500).json({ message: 'Server error' });
-    }
-}
-
-const validateGroupStudentRequests = async function(req,res,next){
-    try{
-        const requestId = req.body.requestId;          // Student_id and group_id param
-        console.log(req.params)
-        console.log(req.query);
-        const isValid = mongoose.Types.ObjectId.isValid(requestId);
-        console.log(requestId);
-
-        if(!isValid)
-        {
-            return res.status(404).json({
-                statuscode: 404,
-                message:'requestId is invalid',
-                requestId,
-            })
-        }
-
-        const request = await requestTable.findById(requestId); 
-
-        if(!request)
-        {
-            return res.status(404).json({
-                statuscode: 404,
-                message:'Request Not found',
-                requestId,
-                suggestion: 'Please check if the request ID is correct and try again.'
-            })
-        }
-
-        return res.status(200).json({
-            statuscode: 200,
-            message:'Request found',
-            requestId,
-        })
-        next();
+        
     }
     catch(error)
     {
