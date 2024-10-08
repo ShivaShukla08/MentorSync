@@ -4,8 +4,15 @@ const studentNotInGroupMiddleware = require('../middleware/studentNotInGroupMidd
 const leaveGroupMiddleware = require('../middleware/leaveGroupMiddleware'); 
 const IsGroupAdminMiddleware = require('../middleware/IsGroupAdminMiddleware'); 
 const isGroupExistsMiddleware = require('../middleware/IsGroupExistsMiddleware')
+const checkStudentExists = require('../middleware/IsGroupExistsMiddleware')
+const validateGroupStudentRequest = require('./../middleware/validateStudentGroupRequest')
+
 const router = express.Router();
 
+router.route('/testingroutes/validrequest/:studentId')
+      .get(testingControllers.UserLoginSuccessfull,validateGroupStudentRequest)
+  
+      
 router
   .route('/use-middleware/student/:studentId/send')
   .get(

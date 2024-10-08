@@ -8,7 +8,7 @@ const xss = require("xss-clean");
 const app = express();
 
 // Importing all the required files
-const StudentRouter = require("./StudentRoutes");
+const studentRouter = require("./StudentRoutes");
 const TeacherRouter = require("./TeacherRoutes");
 const AdminRouter = require("./AdminRoutes");
 const TestingRouter = require("./TestingRoutes")
@@ -17,6 +17,7 @@ const TestingRouter = require("./TestingRoutes")
 // app.use('/api/v1/student', StudentRouter);
 app.use('/api/v1/test', TestingRouter);
 
+app.use(express.json());
 
 // Route Handling
 module.exports = app;
