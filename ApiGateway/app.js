@@ -10,7 +10,12 @@ const app = express();
 // Importing all the required files
 const studentRouter = require("./StudentRoutes");
 const TeacherRouter = require("./TeacherRoutes");
-const adminRouter = require("./AdminRoutes");
+const AdminRouter = require("./AdminRoutes");
+const TestingRouter = require("./TestingRoutes")
+
+// Add Routes
+// app.use('/api/v1/student', StudentRouter);
+app.use('/api/v1/test', TestingRouter);
 
 app.use(express.json());
 
