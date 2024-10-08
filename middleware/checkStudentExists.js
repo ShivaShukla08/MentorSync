@@ -5,6 +5,7 @@ const checkStudentExists = async function (req, res, next){
     try {
 
         const studentId = req.params.id;
+        console.log(studentId)
 
         /* Step2: If the student exists, then we will fetch his detail from studentDetail table and store it 
                 in (req.paramDetail).studentDetail. We are storing his detail here to avoid database
@@ -25,11 +26,6 @@ const checkStudentExists = async function (req, res, next){
         if (!req.paramDetails){ req.paramDetails = {}; } 
        
         req.paramDetails.user = studentDetail; 
-        
-        res.status(200).json({
-            status: "Ok",
-            Details: req.paramDetails
-        })
         next();
 
     } catch (error) {
