@@ -25,7 +25,7 @@ const requestTableSchema = new mongoose.Schema({
     date: Date.now(),
   },
 
-  Rollback: {
+  rollback: {
     type: Boolean,
     default: false,
   },
