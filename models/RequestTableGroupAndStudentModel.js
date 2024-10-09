@@ -8,13 +8,13 @@ const requestTableSchema = new mongoose.Schema({
     required: true,
   },
 
-  student_id: {
+  studentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "studentdetails",
     required: true,
   },
 
-  group_id: {
+  groupId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "presentationgroup",
     required: true,
@@ -25,7 +25,7 @@ const requestTableSchema = new mongoose.Schema({
     date: Date.now(),
   },
 
-  Rollback: {
+  rollback: {
     type: Boolean,
     default: false,
   },
