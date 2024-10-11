@@ -4,7 +4,7 @@ const requestTable = require('./../models/RequestTableGroupAndStudentModel');
 const validateGroupStudentRequest = async function(req,res,next){
     try{
 
-        // Logic: We need groupID and studentId to check in requestTable...
+        // Logic: We need groupID and studentId to check in requestTable..
 
         var groupId, studentId;
 
