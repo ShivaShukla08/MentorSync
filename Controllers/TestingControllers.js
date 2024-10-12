@@ -9,7 +9,7 @@ exports.UserLoginSuccessfull = async (req, res, next) => {
     // user.groupId = gId;
     req.user = user;
 
-    console.log("successful");
+    // console.log(req.user);
 
     // return res.status(404).json({
     //     status: 'Success', 

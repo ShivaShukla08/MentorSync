@@ -15,6 +15,8 @@ const TestingRouter = require("./TestingRoutes")
 
 // Add Routes
 // app.use('/api/v1/student', StudentRouter);
+
+app.use(express.json());
 app.use('/api/v1/test', TestingRouter);
 
 

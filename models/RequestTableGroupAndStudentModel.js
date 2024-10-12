@@ -64,9 +64,8 @@ const requestTableSchema = new mongoose.Schema({
   },
 
   rejectMessage: {
-    type: String,
-    maxlength: 100,
-    default: "",
+    type: [String], // Modified to an array of strings
+    default: [],
   },
 });
 
