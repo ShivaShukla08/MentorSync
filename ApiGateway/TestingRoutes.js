@@ -8,6 +8,7 @@ const checkStudentExists = require('../middleware/IsGroupExistsMiddleware')
 const validateGroupStudentRequest = require('./../middleware/validateStudentGroupRequest')
 const acceptinvitation = require('./../Controllers/StudentControllers/acceptGroupInvitation')
 const rejectInvitation = require('./../Controllers/StudentControllers/rejectGroupInvitation')
+const fetchStudentList = require('./../Controllers/CommonControllers/fetchStudentsList')
 
 const router = express.Router();
 
@@ -19,6 +20,9 @@ router.route('/acceptinvitation/:groupId')
     
 router.route('/rejectinvitation/:groupId') 
       .post(testingControllers.UserLoginSuccessfull,rejectInvitation)
+
+router.route('/fetchstudentlist')
+      .get(fetchStudentList)
       
 router
   .route('/use-middleware/student/:studentId/send')

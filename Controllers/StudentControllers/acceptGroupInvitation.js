@@ -6,7 +6,7 @@ const acceptGroupInvitation = async (req,res) => {
 
     try{
         // Step1: Get the student and group id
-            console.log("groupId", req.params.groupId);
+            // console.log("groupId", req.params.groupId);
             groupId = req.params.groupId;
             studentId = req.user.id;
 
