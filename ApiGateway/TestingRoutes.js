@@ -17,7 +17,7 @@ const router = express.Router();
 router.route('/testingroutes/validrequest/:studentId')
       .get(testingControllers.UserLoginSuccessfull,validateGroupStudentRequest)
 
-router.route('/mark-full/:groupId')
+router.route('/changestatus/:groupId')
 .patch(testingControllers.UserLoginSuccessfull,updateGroupStatus)
 
 router.route('/sendnotification')
