@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { type } = require('os');
+const { title } = require('process');
 
 // Define the schema
 const notificationSchema = new mongoose.Schema({
@@ -7,10 +9,15 @@ const notificationSchema = new mongoose.Schema({
     ref: 'UserDetail',
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+    maxlength: 100,
+  },
   content: {
     type: String,
     required: true,
-    maxlength: 600,
+    maxlength: 2000,
   },
   role: {
     type: String,

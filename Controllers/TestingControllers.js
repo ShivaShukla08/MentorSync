@@ -3,11 +3,12 @@ const studentDetail = require('../models/StudentDetailModel')
 const presentationGroup = require('../models/PresentationGroupsModel');
 
 exports.UserLoginSuccessfull = async (req, res, next) => {
-    const user = await studentDetail.findOne({ 'sapId': 'student123' });
+    const user = await studentDetail.findOne({ 'sapId': 'SAP789012' });
     // req.userGroup = (user.groupId);
     // const gId = (user.groupId._id);
     // user.groupId = gId;
     req.user = user;
+    req.user.role = 'student';
 
     // console.log(req.user);
 

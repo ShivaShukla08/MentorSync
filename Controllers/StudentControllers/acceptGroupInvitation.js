@@ -16,10 +16,21 @@ const acceptGroupInvitation = async (req,res) => {
                   We will be marking the accept2 state as accepted*/
 
             const result = await groupStudentRequestModel.updateOne(
-                { groupId: groupId, studentId: studentId, accept2: "pending" }, 
-                { $set: { accept2: "accept" } }
+                { groupId: groupId, studentId: studentId, accept1: "accepted", accept2: "pending" }, 
+                { $set: { accept2: "accepted" } }
             );
            
+            if (result.matchedCount === 0) {
+                return res.status(404).json({ 
+                  status: 'fail', 
+                  message: 'No matching request found' 
+                });
+              } else if (result.modifiedCount === 0) {
+                return res.status(200).json({ 
+                  status: 'success', 
+                  message: 'No changes made, request already in the desired state' 
+                });
+              }
         // console.log(result);
 
         // Step3: After Modifying the requestTable we have to add that student to that group by modifying presentationGroup table.

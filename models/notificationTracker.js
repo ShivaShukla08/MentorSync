@@ -13,14 +13,19 @@ const notificationTrackerSchema = new mongoose.Schema({
         ref: 'Notification',
         required: true,
       },
-      read: {
+      isread: {
         type: Boolean,
         default: false,
       },
       markAsImportant: {
         type: Boolean,
         default: false,
-      }
+      },
+      deleted:{
+        type: Boolean,
+        default: false,
+      },
+      _id: false
     },
   ],
 });

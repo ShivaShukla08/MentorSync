@@ -9,12 +9,21 @@ const validateGroupStudentRequest = require('./../middleware/validateStudentGrou
 const acceptinvitation = require('./../Controllers/StudentControllers/acceptGroupInvitation')
 const rejectInvitation = require('./../Controllers/StudentControllers/rejectGroupInvitation')
 const fetchStudentList = require('./../Controllers/CommonControllers/fetchStudentsList')
+const sendnotification = require('./../Controllers/GroupControllers/notifyGroupMembers')
+const updateGroupStatus = require('./../Controllers/GroupControllers/updateGroupStatus');
 
 const router = express.Router();
 
 router.route('/testingroutes/validrequest/:studentId')
       .get(testingControllers.UserLoginSuccessfull,validateGroupStudentRequest)
-  
+
+router.route('/mark-full/:groupId')
+.patch(testingControllers.UserLoginSuccessfull,updateGroupStatus)
+
+router.route('/sendnotification')
+      .post(testingControllers.UserLoginSuccessfull,sendnotification)
+
+
 router.route('/acceptinvitation/:groupId')
       .patch(testingControllers.UserLoginSuccessfull,acceptinvitation)
     
