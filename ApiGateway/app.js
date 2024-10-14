@@ -9,13 +9,18 @@ const app = express();
 
 // Importing all the required files
 const studentRouter = require("./StudentRoutes");
-const TeacherRouter = require("./TeacherRoutes");
-const AdminRouter = require("./AdminRoutes");
-const TestingRouter = require("./TestingRoutes")
+const teacherRouter = require("./TeacherRoutes");
+const adminRouter = require("./AdminRoutes");
+const testingRouter = require("./TestingRoutes")
+
+// Body parser, reading data from body into req.body
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json({ limit: '2Mb' }));
+
 
 // Add Routes
-// app.use('/api/v1/student', StudentRouter);
-app.use('/api/v1/test', TestingRouter);
+app.use('/api/v1/student', studentRouter);
+app.use('/api/v1/test', testingRouter);
 
 app.use(express.json());
 

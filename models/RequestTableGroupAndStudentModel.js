@@ -8,13 +8,13 @@ const requestTableSchema = new mongoose.Schema({
     required: true,
   },
 
-  student_id: {
+  studentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "studentdetails",
     required: true,
   },
 
-  group_id: {
+  groupId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "presentationgroup",
     required: true,
@@ -25,7 +25,7 @@ const requestTableSchema = new mongoose.Schema({
     date: Date.now(),
   },
 
-  Rollback: {
+  rollback: { 
     type: Boolean,
     default: false,
   },
@@ -63,11 +63,17 @@ const requestTableSchema = new mongoose.Schema({
     default: false,
   },
 
-  rejectMessage: {
-    type: String,
-    maxlength: 100,
-    default: "",
-  },
+  rejectMessage: [{
+    message: {
+      type: String,
+      maxlength: 100,
+    },
+    createdAt: {
+      type: Date,
+      date: Date.now(),
+    },
+    _id: false
+  }],
 });
 
 const RequestTable = mongoose.model(

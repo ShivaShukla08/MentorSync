@@ -3,20 +3,17 @@ const studentDetail = require('../models/StudentDetailModel')
 const presentationGroup = require('../models/PresentationGroupsModel');
 
 exports.UserLoginSuccessfull = async (req, res, next) => {
-    const user = await studentDetail.findOne({ 'sapId': 'student123' }).populate('groupId');
+    const user = await studentDetail.findOne({ 'sapId': '500086' }).populate('groupId');
     req.userGroup = (user.groupId);
-    const gId = (user.groupId._id);
+    let gId;
+    if(user.groupId){
+        gId = (user.groupId._id);
+    }
     user.groupId = gId;
     req.user = user;
 
-    console.log("successful");
+   console.log("Add User Data after Login-successful");
 
-    return res.status(404).json({
-        status: 'Success', 
-        user: req.user,
-        group: req.userGroup
-    });
-    
     return next();
 }
 

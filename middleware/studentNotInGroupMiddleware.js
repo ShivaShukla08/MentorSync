@@ -7,8 +7,8 @@ exports.studentNotInGroup = async (req, res, next) => {
     let groupId = null;
     // If the URL contains a studentId, check that student is any group or not.
     if (req.params.studentId) {
-        if (req.paramDetail.user._id) {
-            groupId = req.group.groupId;
+        if (req.paramDetails.user) {
+            groupId = req.paramDetails.user.groupId;
         } else {
             // If req.group is not present in req object, retrieve the groupId from the studentDetails table.
             const checkUser = await studentDetail.findOne({ _id: req.params.studentId });
@@ -21,14 +21,21 @@ exports.studentNotInGroup = async (req, res, next) => {
         groupId = req.user.groupId;
     }
 
-
-    // if student in any group then return it.
-    if (!groupId) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'You are already in any group!.'
-        });
+    // check if the student is in any group then return it.
+    if (groupId) {
+        //if studentId is present in params, send message
+        if(req.params.studentId){
+            return res.status(403).json({
+                status: 'fail',
+                message: 'Student is already present in any group!.'
+            });
+        }else{
+            return res.status(403).json({
+                status: 'fail',
+                message: 'You are already in any group!.'
+            }); 
+        }
     }
     // Check if student not in any group then move to next middleware
-    return next();
+    next();
 };
