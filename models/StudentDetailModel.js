@@ -117,8 +117,15 @@ const studentDetailSchema = new mongoose.Schema({
   previousGroup: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "PresentationGroup",
+      ref: "presentationGroup",
       required: false, // Not necessary, keep it optional
+    },
+  ],
+
+  leaveGroup: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "presentationGroup",
     },
   ],
 

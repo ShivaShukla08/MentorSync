@@ -94,6 +94,11 @@ const presentationGroupSchema = new mongoose.Schema({
         },
     ],
 
+    synopsisDate: {
+        type: Date,
+        default: null
+    },
+
     createdAt: {
         type: Date,
         date: Date.now()
