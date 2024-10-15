@@ -1,4 +1,4 @@
-const StudentDetail = require('./../../models/StudentDetailModel');
+const StudentDetail = require('../../models/StudentDetailModel');
 
 const fetchStudentList = async (req,res) => {
     try {

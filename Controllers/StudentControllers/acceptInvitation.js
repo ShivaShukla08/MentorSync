@@ -1,6 +1,6 @@
-const groupStudentRequestModel = require('./../../models/RequestTableGroupAndStudentModel');
-const PresentationGroupsModel = require('./../../models/PresentationGroupsModel');
-const studentDetailModel = require('./../../models/StudentDetailModel')
+const groupStudentRequestModel = require('../../models/RequestTableGroupAndStudentModel');
+const PresentationGroupsModel = require('../../models/PresentationGroupsModel');
+const studentDetailModel = require('../../models/StudentDetailModel')
 
 const acceptGroupInvitation = async (req,res) => {
 

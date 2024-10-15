@@ -1,5 +1,5 @@
 const { model } = require('mongoose');
-const requestDetails = require('./../../models/RequestTableGroupAndStudentModel');
+const requestDetails = require('../../models/RequestTableGroupAndStudentModel');
 
 const rejectInvitation = async (req, res) => {
 
@@ -9,7 +9,7 @@ const rejectInvitation = async (req, res) => {
         const studentId = req.user.id;
 
         // Step 2: Get the reject the message 
-        const rejectMessage = req.body.rejectMessage;
+        const rejectMessage = req.body.message;
         const updatedRequestDetails = await requestDetails.findOneAndUpdate(
             {groupId, studentId},
             {
