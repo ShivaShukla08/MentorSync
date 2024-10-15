@@ -22,8 +22,8 @@ const notificationTrackerSchema = new mongoose.Schema({
         default: false,
       },
       deleted:{
-        type: Boolean,
-        default: false,
+        type: Date,
+        default: null,
       },
       _id: false
     },
