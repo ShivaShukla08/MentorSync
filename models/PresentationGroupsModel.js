@@ -64,7 +64,7 @@ const presentationGroupSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'teacherDetail',
     },
-    RemovingForcefully: [
+    removingForcefully: [
         {
             studentId: {
                 type: mongoose.Schema.Types.ObjectId,
