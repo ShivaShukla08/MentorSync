@@ -25,8 +25,8 @@ const validateGroupStudentRequest = async function(req,res,next){
         // Step 2: Check if both student_id and group_id exist in the requestTable
 
         const requestExists = await requestTable.findOne({
-            student_id: studentId,
-            group_id: groupId
+            studentId: studentId,
+            groupId: groupId
         });
 
 
@@ -34,7 +34,7 @@ const validateGroupStudentRequest = async function(req,res,next){
         if (requestExists) {
             next();
         } else {
-            return res.status(200).json({ message: 'Request already exists.', request: requestExists });
+            return res.status(404).json({ message: "Request does't exists.", studentId: studentId, groupId: groupId });
         }
         
     }
