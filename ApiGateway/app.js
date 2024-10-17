@@ -6,6 +6,8 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const app = express();
+const cookieParser = require('cookie-parser');
+
 
 // Importing all the required files
 const studentRouter = require("./StudentRoutes");
@@ -23,6 +25,10 @@ const notFoundHandler = require('../utils/notFoundHandler');
 // Body parser, reading data from body into req.body
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json({ limit: '2Mb' }));
+
+// Use cookie-parser
+app.use(cookieParser());
+
 
 app.use('/api/v1/student/', studentRouter);
 app.use('/api/v1/teacher/',teacherRouter);

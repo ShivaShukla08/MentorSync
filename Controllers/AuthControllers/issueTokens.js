@@ -16,9 +16,13 @@ const RefreshToken = (id, sessionid) => {
 };
 
 // sending access and refresh JWT Token to user
-exports.createSendToken = (res, user, sessionidA, sessionidR) => {
-    const accessToken = AccessToken(user._id, user.role, sessionidA);
-    const refreshToken = RefreshToken(user._id, user.role, sessionidR);
+exports.createSendToken = (res, user) => {
+    // created session_id of refreshToken and accessToken.
+    const sessionidA = crypto.randomUUID().replace(/-/g, '');
+    const sessionidR = crypto.randomUUID().replace(/-/g, '');
+
+    const accessToken = AccessToken(user.userId, user.role, sessionidA);
+    const refreshToken = RefreshToken(user.userId, user.role, sessionidR);
 
     // JWT Access-Token
     const accessCookies = {
@@ -45,7 +49,7 @@ exports.createSendToken = (res, user, sessionidA, sessionidR) => {
     // Remove password from output
     user.password = undefined;
 
-   // Set the Bearer token in the Authorization header
-   res.setHeader('Authorization', `Bearer ${accessToken}`);
+    // Set the Bearer token in the Authorization header
+    res.setHeader('Authorization', `Bearer ${accessToken}`);
 };
 
