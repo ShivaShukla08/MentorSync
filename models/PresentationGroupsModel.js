@@ -64,7 +64,7 @@ const presentationGroupSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'teacherDetail',
     },
-    RemovingForcefully: [
+    removingForcefully: [
         {
             studentId: {
                 type: mongoose.Schema.Types.ObjectId,
@@ -93,6 +93,11 @@ const presentationGroupSchema = new mongoose.Schema({
             _id: false,  // Prevent _id generation for RemovingForcefully Field
         },
     ],
+
+    synopsisDate: {
+        type: Date,
+        default: null
+    },
 
     createdAt: {
         type: Date,
