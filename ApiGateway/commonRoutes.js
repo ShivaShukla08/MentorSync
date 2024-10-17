@@ -3,3 +3,8 @@ const router = express.Router();
 
 const middleware = require('./../utils/middlewareExport');
 const commonController = require('./../utils/commonControllerExport');
+
+
+
+
+module.exports = router;

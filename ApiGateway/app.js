@@ -11,17 +11,30 @@ const app = express();
 const studentRouter = require("./StudentRoutes");
 const teacherRouter = require("./TeacherRoutes");
 const adminRouter = require("./AdminRoutes");
-const testingRouter = require("./TestingRoutes")
 const commonRouter = require('./commonRoutes');
+const authRouter = require('./authRoutes');
+
+// Import Error File
+const AppError = require('../utils/appError');
+const globalErrorHandler = require('../utils/errorHandling');
+const notFoundHandler = require('../utils/notFoundHandler');
+
+
+// Body parser, reading data from body into req.body
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json({ limit: '2Mb' }));
 
 app.use('/api/v1/student/', studentRouter);
 app.use('/api/v1/teacher/',teacherRouter);
 app.use('/api/v1/admin/',adminRouter);
-app.use('/api/v1/testing/',testingRouter);
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/', commonRouter);
 
 
-app.use(express.json());
+app.use(globalErrorHandler);
+
+// Catch-all for undefined routes
+app.use(notFoundHandler);
 
 // Route Handling
 module.exports = app;
