@@ -25,7 +25,7 @@ const requestTableSchema = new mongoose.Schema({
     date: Date.now(),
   },
 
-  rollback: {
+  rollback: { 
     type: Boolean,
     default: false,
   },
@@ -63,10 +63,17 @@ const requestTableSchema = new mongoose.Schema({
     default: false,
   },
 
-  rejectMessage: {
-    type: [String], // Modified to an array of strings
-    default: [],
-  },
+  rejectMessage: [{
+    message: {
+      type: String,
+      maxlength: 100,
+    },
+    createdAt: {
+      type: Date,
+      date: Date.now(),
+    },
+    _id: false
+  }],
 });
 
 const RequestTable = mongoose.model(
