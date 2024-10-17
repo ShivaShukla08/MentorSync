@@ -5,7 +5,7 @@ const logout = require('../controllers/authcontrollers/logout');
 const modifyPassword = require('../controllers/authcontrollers/modifyPassword');
 const requestPasswordReset = require('../controllers/authcontrollers/requestPasswordReset');
 const updatePassword = require('../controllers/authcontrollers/updatePassword');
-const verifyToken = require('../Controllers/AuthControllers/verifyToken');
+const authorizeToken = require('../Controllers/AuthControllers/verifyToken');
 
 
 module.exports = {
@@ -15,6 +15,6 @@ module.exports = {
   modifyPassword,
   requestPasswordReset,
   updatePassword,
-  verifyToken,
+  authorizeToken,
 };
 
