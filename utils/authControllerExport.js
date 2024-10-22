@@ -2,9 +2,9 @@
 const login = require('../Controllers/AuthControllers/loginUser');
 const authorizeRole = require('../controllers/authcontrollers/authorizeRole');
 const logout = require('../controllers/authcontrollers/logout');
-const modifyPassword = require('../controllers/authcontrollers/modifyPassword');
+const resetPassword = require('../Controllers/AuthControllers/resetPassword');
 const requestPasswordReset = require('../controllers/authcontrollers/requestPasswordReset');
-const updatePassword = require('../controllers/authcontrollers/updatePassword');
+const updatePassword = require('../Controllers/AuthControllers/updatePassword');
 const authorizeToken = require('../Controllers/AuthControllers/verifyToken');
 
 
@@ -12,7 +12,7 @@ module.exports = {
   login,
   authorizeRole,
   logout,
-  modifyPassword,
+  resetPassword,
   requestPasswordReset,
   updatePassword,
   authorizeToken,

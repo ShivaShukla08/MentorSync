@@ -8,8 +8,15 @@ router
 .post(authcontroller.login)
 
 router
-.route('/protect')
-.post(authcontroller.authorizeToken, authcontroller.authorizeRole('student'))
+.route('/forget-password')
+.post(authcontroller.requestPasswordReset);
 
+router
+.route('/reset-password')
+.post(authcontroller.resetPassword);
+
+router
+.route('/update-password')
+.patch(authcontroller.authorizeToken, authcontroller.updatePassword);
 
 module.exports = router;
