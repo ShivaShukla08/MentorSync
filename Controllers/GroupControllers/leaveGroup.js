@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const requestTableGroupAndStudent = require('../../models/RequestTableGroupAndStudentModel')
 
-exports.leaveGroup = async(req, res) => {
+const leaveGroup = async(req, res) => {
     try {
         const user = req.user;
         const group = req.userGroup;
@@ -31,23 +32,54 @@ exports.leaveGroup = async(req, res) => {
            
         });
 
+        const totalNormalStudent = group.role.user.length;
+
         //if student is normal user then remove studentId in user arrays
         group.role.user = group.role.user.filter(
             (id) => id.toString() !== studentId.toString()
         );
 
-        
-        
+        //check if student is Admin user, then remove studentId in Admin arrays
+        if(totalNormalStudent === group.role.user.length){
+            group.role.admin = group.role.admin.filter(
+                (id) => id.toString() !== studentId.toString()
+            );
 
+            // if group Admin are not present
+            if(group.role.admin.length === 0 && group.role.user.length > 0){
+                // make admin of normal user
+                group.role.admin.push(group.role.user[0]); 
+                group.role.user.shift();  // remove the userID of userArray's
+            }
+        }
+
+        // remove groupId from studentDetail Table.
+        user.groupId = undefined;
+
+        // add groupId in previousLeavegroup array of studentDetails Table
+        user.leaveGroup.push(group._id);
+
+        // updated requesttablegroupandstudent table in validity field
+        await requestTableGroupAndStudent.updateMany(
+            { studentId: user._id }, 
+            { $set: { 'validity.first': false } },
+          );
+            
+        // save doc
+        await user.save();
+        await group.save();
+                  
         return res.status(200).json({
             status: 'success',
             message: 'you have successfully leave the group.',
         });
-
-    }catch(err) {
+            
+    }catch(err){
         res.status(500).json({
             status: 'fail',
-            message: "Server Error"
+            message: 'Server Error'
         });
     }
 }
+
+module.exports = leaveGroup;

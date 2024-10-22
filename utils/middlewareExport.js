@@ -1,21 +1,25 @@
 // utils/middleware.js
 
 // Import all middleware from middleware
-const IsGroupAdminMiddleware = require('../middleware/IsGroupAdminMiddleware');
+const IsGroupAdmin = require('../middleware/IsGroupAdminMiddleware');
 const isGroupFull = require('../middleware/isGroupFull');
-const studentNotInGroupMiddleware = require('../middleware/studentNotInGroupMiddleware');
-const IsGroupExistsMiddleware = require('../middleware/IsGroupExistsMiddleware');
+const studentNotInGroup = require('../middleware/studentNotInGroupMiddleware');
+const IsGroupExists = require('../middleware/IsGroupExistsMiddleware');
 const checkStudentExists = require('../middleware/checkStudentExists');
-const leaveGroupMiddleware = require('../middleware/leaveGroupMiddleware');
+const leaveGroup = require('../middleware/leaveGroupMiddleware');
 const validateStudentGroupRequest = require('../middleware/validateStudentGroupRequest');
+const studentInGroup = require('../middleware/studentInGroup');
+const validateJoinRequest = require('../middleware/validateJoinRequestS&G')
 
 // Export all middleware as an object
 module.exports = {
-    IsGroupAdminMiddleware,
+    IsGroupAdmin,
     isGroupFull,
-    studentNotInGroupMiddleware,
-    IsGroupExistsMiddleware,
+    studentNotInGroup,
+    IsGroupExists,
     checkStudentExists,
-    leaveGroupMiddleware,
+    leaveGroup,
     validateStudentGroupRequest,
+    studentInGroup,
+    validateJoinRequest
 };
