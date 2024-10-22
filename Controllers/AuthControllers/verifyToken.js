@@ -4,7 +4,7 @@ const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const User = require('../../models/UserModel');
 const studentDetail = require('../../models/StudentDetailModel');
-const teacherDeatail = require('../../models/TeacherDetailModel');
+const teacherDetail = require('../../models/TeacherDetailModel');
 const { createSendToken } = require('./issueTokens');
 
 const authorizeToken = catchAsync(async (req, res, next) => {
@@ -43,14 +43,14 @@ const authorizeToken = catchAsync(async (req, res, next) => {
         }
 
         // 4) Check if the user changed the password after the JWT was issued
-        // if (await currentUser.changedPasswordAfter(decoded.iat)) {
-        //     return next(new AppError('User recently changed password! Please log in again.', 401));
-        // }
+        if (await currentUser.changedPasswordAfter(decoded.iat)) {
+            return next(new AppError('User recently changed password! Please log in again.', 401));
+        }
 
         // Send new access and refresh tokens if the refresh token was used
         if (refreshToken) {
             // if everthing true, send token to user
-            createSendToken(res, currentUser.userId, sessionidA, sessionidR);;
+            createSendToken(res, currentUser.userId);
         }
 
         // Grant access to protected routes   
