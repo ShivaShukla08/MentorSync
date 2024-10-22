@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const requestTableGroupAndStudent = require('../../models/RequestTableGroupAndStudentModel');
 
 // Groups, Accept a student join request
-exports.acceptStudentRequestByGroup = async (req, res) => {
+const acceptStudentRequestByGroup = async (req, res) => {
     try {
         const usergroupId = req.user.groupId;
         const studentId = req.params.studentId;
@@ -73,3 +73,5 @@ exports.acceptStudentRequestByGroup = async (req, res) => {
         res.status(500).json({ status: 'fail', message: 'server Error.' })
     }
 }
+
+module.exports = acceptStudentRequestByGroup;

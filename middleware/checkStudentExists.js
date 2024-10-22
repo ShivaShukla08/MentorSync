@@ -20,7 +20,6 @@ const checkStudentExists = async function (req, res, next){
                 search regarding his detail in future.                                               */
 
         const studentDetail =  await StudentDetail.findById({_id: studentId});
-        console.log(studentDetail);
 
         if (!studentDetail){
             return res.status(404).json({

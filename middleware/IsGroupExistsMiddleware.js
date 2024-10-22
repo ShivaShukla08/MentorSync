@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const presentationGroup = require('../models/PresentationGroupsModel');
 const isValidObjectId = require('../utils/verifyObjectId');
 
-exports.isGroupExists = async (req, res, next) => {
+const isGroupExists = async (req, res, next) => {
 
     const groupId = req.params.groupId;
     if(!isValidObjectId(groupId)){
@@ -28,3 +28,5 @@ exports.isGroupExists = async (req, res, next) => {
 
     return next();
 };
+
+module.exports = isGroupExists;

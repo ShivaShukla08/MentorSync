@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const studentDetail = require('../models/StudentDetailModel');
 
 
-exports.studentNotInGroup = async (req, res, next) => {
+const studentNotInGroup = async (req, res, next) => {
 
     let groupId = null;
     // If the URL contains a studentId, check that student is any group or not.
@@ -39,3 +39,5 @@ exports.studentNotInGroup = async (req, res, next) => {
     // Check if student not in any group then move to next middleware
     return next();
 };
+
+module.exports = studentNotInGroup;

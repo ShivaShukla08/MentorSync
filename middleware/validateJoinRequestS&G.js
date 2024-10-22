@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const RequestTableGroupAndStudent = require('../models/RequestTableGroupAndStudentModel');
 
-exports.validateGroupStudentJoinRequest = async (req, res, next) => {
+const validateGroupStudentJoinRequest = async (req, res, next) => {
     try {
-
         let groupId, studentId;
 
         // Step1: Identify the type of request (0 or 1).
@@ -116,3 +115,6 @@ exports.validateGroupStudentJoinRequest = async (req, res, next) => {
         return res.status(500).json({ message: 'Server error' });
     }
 };
+
+
+module.exports = validateGroupStudentJoinRequest;
