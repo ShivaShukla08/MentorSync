@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const requestTableGroupAndStudent = require('../../models/RequestTableGroupAndStudentModel');
 
 // students, send request to group 
-exports.sendJoinRequestToGroup = async (req, res) => {
+const sendJoinRequestToGroup = async (req, res) => {
     try {
         const note = req.body.note || "";
         const studentId = req.user._id;
@@ -51,3 +51,5 @@ exports.sendJoinRequestToGroup = async (req, res) => {
         });
     }
 };
+
+ module.exports = sendJoinRequestToGroup;

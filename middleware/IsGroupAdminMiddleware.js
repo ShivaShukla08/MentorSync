@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const presentationGroup = require('../models/PresentationGroupsModel');
 
-exports.isGroupAdmin = async (req, res, next) => {
+const isGroupAdmin = async (req, res, next) => {
 
     try{
         const userId = req.user._id.toString();
@@ -35,3 +35,5 @@ exports.isGroupAdmin = async (req, res, next) => {
     }
    
 };
+
+module.exports = isGroupAdmin;

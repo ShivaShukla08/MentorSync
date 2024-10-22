@@ -67,8 +67,13 @@ const authorizeToken = catchAsync(async (req, res, next) => {
 const setUserDetails = async (req, res, next, currentUser) => {
     if (currentUser.role === 'student') {
         const user = await studentDetail.findOne({ sapId: currentUser.userId }).populate('groupId');
-        if (user && user.groupId) {
+        if (user) {
             req.userGroup = user.groupId;
+            let gId;
+            if(user.groupId){
+                gId = (user.groupId._id);
+            }
+            user.groupId = gId;
             req.user = user;
             req.role = 'student';
         }
@@ -80,7 +85,7 @@ const setUserDetails = async (req, res, next, currentUser) => {
         req.role = 'admin';
     }
 
-    next();
+   return next();
 };
 
 

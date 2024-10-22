@@ -21,6 +21,8 @@ const AppError = require('../utils/appError');
 const globalErrorHandler = require('../utils/errorHandling');
 const notFoundHandler = require('../utils/notFoundHandler');
 
+app.use(morgan('dev'));
+
 
 // Body parser, reading data from body into req.body
 app.use(express.urlencoded({ extended: true })); 

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
-exports.studentInGroup = async (req, res, next) => {
+const studentInGroup = async (req, res, next) => {
     usergroupId = req.user.groupId;
-
     // check if user(student) is not in group
     if (!usergroupId) {
         return res.status(401).json({
@@ -14,3 +13,5 @@ exports.studentInGroup = async (req, res, next) => {
     // if student is in any group then move to next middleware
     next();
 };
+
+module.exports = studentInGroup;
